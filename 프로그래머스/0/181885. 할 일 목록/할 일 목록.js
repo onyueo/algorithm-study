@@ -1,5 +1,3 @@
 function solution(todo_list, finished) {
-    var answer = [];
-    var test = finished.filter((el, i) => el ? '' : answer.push(todo_list[i]));
-    return answer;
+    return todo_list.filter((_, i) => !finished[i]);
 }
