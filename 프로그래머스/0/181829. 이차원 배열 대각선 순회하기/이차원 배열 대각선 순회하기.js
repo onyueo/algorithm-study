@@ -1,6 +1,13 @@
 function solution(board, k) {
-  return board.reduce(
-    (total, row, i) => total + row.reduce((prev, num, j) => (i + j <= k ? prev + num : prev), 0),
-    0,
-  );
+    let answer = 0
+    let i = 0
+    for (arr of board) {
+        answer += arr.slice(0, k-i+1).reduce((arr, cur) => arr+cur, 0)
+        console.log(answer)
+        i++
+        if(i > k) {
+            break
+        }
+    }
+  return answer
 }
