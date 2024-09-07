@@ -1,28 +1,26 @@
 function solution(board) {
-  let answer = 0;
-	
-  const dangerArea = [
-		[-1, 0], [1, 0], [0, 1], [0, -1], [-1, 1], [1, 1], [1, -1], [-1, -1]
-	]; // 위험지역 xy좌표
-	
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      if (board[i][j] == 1) {
-        dangerArea.map((v) => {
-          let [x, y] = v;
-          [x, y] = [x + i, y + j];
-          if (
-            x >= 0 &&
-            x < board.length &&
-            y >= 0 &&
-            y < board[i].length &&
-            board[x][y] == 0
-          )
-            board[x][y] = 2;
-        });
-      }
+    var answer = 0;
+    const len = board.length
+    const dir = [[1, 0], [0, 1], [-1, 0], [0, -1], [1,1], [1,-1], [-1,1], [-1,-1]]
+    for (let i=0; i<len; i++) {
+        for (let j=0; j<len; j++) {
+            if (board[i][j] === 1) {
+                for (const [x, y] of dir) {
+                    const newX = i + x;
+                    const newY = j + y;
+
+                    if (newX >= 0 && newX < len && newY >= 0 && newY < len && board[newX][newY] === 0) {
+                        board[newX][newY] = 3;
+                        
+                    }
+                }
+            }
+        }
     }
-  }
-  board.map(v1 => v1.map(v2 => v2 == 0 ? answer++ : 0));
-  return answer;
+
+    for (let k=0; k<len; k++) {
+        console.log(board[k])
+        answer += board[k].filter((el) => el === 0).length
+    }
+    return answer;
 }
