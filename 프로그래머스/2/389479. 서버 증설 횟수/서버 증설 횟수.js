@@ -8,17 +8,16 @@ function solution(players, m, k) {
         var need = Math.floor(players[i] / m)
         var check = false
         
-        for (let j=i; j<i+k; j++) {
+        for (let j=i; j<i+k && j<24; j++) {
             if (servernow <= need) {
                 arr[j] += need - servernow
                 check = true
             }
-            if(j > 24) break
+        
         }
         if (check) {
             answer += need - servernow
         }
-        console.log(answer, i)
     }
     return answer;
 }
